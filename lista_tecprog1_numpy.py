@@ -22,3 +22,7 @@ print(f'O valor mínimo deste array é: {vetor.min()}')
 #Questão 8:
 
 #Questão 9:
+
+#Questão 10:
+
+#Questão 11:
