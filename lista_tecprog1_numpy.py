@@ -69,9 +69,42 @@ print(f'Matriz inicial: \n{matriz_5}')
 print(f'Matriz final: \n{matriz_borda_zero(matriz_5)}')
 '''
 #Questão 6:
+'''
+def processando_sinal_EEG(matriz_X):
+  media = matriz_X.sum()/matriz_X.size
+  matriz_X_processada = matriz_X - media
+  return matriz_X_processada
 
+X = np.random.randn(64,512)
+print(X)
+print(X.shape)
+print(processando_sinal_EEG(X))
+print(processando_sinal_EEG(X).shape)
+print((processando_sinal_EEG(X) - X).sum())
+'''
 #Questão 7:
+'''
+def locate_outliers(X):
+  quantil_1 = np.quantile(X, 0.25)
+  #print(quantil_1)
+  quantil_3 = np.quantile(X, 0.75)
+  #print(quantil_3)
+  lim_s = quantil_3 + 1.5*(quantil_3-quantil_1)
+  #print(lim_s)
+  lim_i = quantil_1 - 1.5*(quantil_3-quantil_1)
+  #print(lim_i)
+  is_outlier = np.where(((X > lim_s) | (X < lim_i)), True, False)
+  outliers_count = np.count_nonzero(X*is_outlier)
+  outliers = X[((X > lim_s) | (X < lim_i))]
+  return is_outlier, outliers_count, outliers
 
+X = np.random.randn(300,15)
+is_outlier, outliers_count, outliers = locate_outliers(X)
+print(X)
+print(is_outlier)
+print(outliers_count)
+print(outliers)
+'''
 #Questão 8:
 '''
 vetor_8 = np.arange(1,22,2)
@@ -95,3 +128,17 @@ print(f'O vetor normalizado é: \n {normaliza_dados(vetor_10)}')
 '''
 
 #Questão 11:
+'''
+vetor_notas = np.round(np.random.rand(100)*10, 2)
+
+def analisando_notas(notas):
+    media = np.mean(notas)
+    desvio_padrao = np.std(notas)
+    nota_maior7 = notas[(notas>7)].size
+    numero_reprovacoes = notas[(notas>5)].size
+    nota_minima = np.min(notas)
+    nota_maxima = np.max(notas)
+    return np.array([media, desvio_padrao, nota_maior7, numero_reprovacoes, nota_minima, nota_maxima])
+
+print(f'Notas: {vetor_notas} \nAnálise: {analisando_notas(vetor_notas)}')
+'''
